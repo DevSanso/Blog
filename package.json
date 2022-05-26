@@ -1,0 +1,24 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevSanso/Blog.git"
+  },
+  "author": "Sunken Ahn <devsanso@outlook.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DevSanso/Blog/issues"
+  },
+  "homepage": "https://github.com/DevSanso/Blog#readme",
+  "devDependencies": {
+
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  }
+}
