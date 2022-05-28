@@ -6,7 +6,6 @@ import middleware_register from "./middleware";
 
 const app : Listener = (()=>{
     let e = express();
-    e.listen()
     middleware_register(e);
     return e;
 })();
