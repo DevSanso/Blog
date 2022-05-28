@@ -1,7 +1,3 @@
-import {} from "@local/metadata"
-
-
-
-
+import app from "@local/express_singleton"
 
 
