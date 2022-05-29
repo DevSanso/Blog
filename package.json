@@ -22,6 +22,9 @@
     "typescript": "^4.7.2"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "@local/express_singleton" : "file:./packages/express_singleton",
+    "@local/metadata" : "file:./packages/metadata",
+    "@local/middleware_page" : "file:./packages/middleware/page"
   }
 }
