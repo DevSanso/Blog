@@ -1,3 +1,4 @@
 const process = require('child_process');
 
-process.execSync("rm ./packages/**/*.js");
+process.exec("rm ./packages/**/*.js");
+process.exec("rm ./packages/middleware/**/*.js");
