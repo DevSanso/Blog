@@ -1,0 +1,32 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile" : "node ./compile.js",
+    "clean" : "node ./clean.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevSanso/Blog.git"
+  },
+  "author": "Sunken Ahn <devsanso@outlook.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DevSanso/Blog/issues"
+  },
+  "homepage": "https://github.com/DevSanso/Blog#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "@local/express_singleton" : "file:./packages/express_singleton",
+    "@local/metadata" : "file:./packages/metadata",
+    "@local/middleware_page" : "file:./packages/middleware/page"
+  }
+}
