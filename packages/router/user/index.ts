@@ -2,6 +2,9 @@ import {Request,Response,Router} from 'express';
 import bcrypt from 'bcrypt';
 
 
+import '@local/extends/express_session/user_info';
+
+
 import userInfo from './user.json';
 
 import './session';

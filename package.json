@@ -28,8 +28,9 @@
   "dependencies": {
     "@local/express_singleton": "file:./packages/express_singleton",
     "@local/metadata": "file:./packages/metadata",
-    "@local/middleware_page": "file:./packages/middleware/page",
-    "@local/router_user":"file:./packages/router/user",
+    "@local/middleware_page" : "file:./packages/middleware/page",
+    "@local/router_user" : "file:./packages/router/user",
+    "@local/extends" : "file:./packages/extends",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
