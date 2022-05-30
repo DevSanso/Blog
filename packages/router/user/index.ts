@@ -7,7 +7,7 @@ import '@local/extends/express_session/user_info';
 
 import userInfo from './user.json';
 
-import './session';
+import '@local/extends/express_session/user_info';
 
 
 
