@@ -1,5 +1,5 @@
 import {env} from 'process';
-import {join,parse} from 'path';
+import {join,parse,ParsedPath} from 'path';
 import {existsSync} from 'fs';
 
 import {Request,Response,NextFunction} from 'express';
@@ -12,9 +12,9 @@ const mapping = (() => {
 
 
 const isMatchingExt = (url : string,mapping : Array<string>) => {
-    const ret = mapping.findIndex(function(value,index,array) {
-        return value == this.ext;
-    },parse(url));
+    const ret = mapping.findIndex((value,index,array) => {
+        return value == parse(url).ext;
+    });
     return ret != -1? true : false;
 };
 
