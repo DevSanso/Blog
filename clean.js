@@ -1,4 +1,22 @@
 const process = require('child_process');
+const { stringify } = require('querystring');
+const p = require('./package.json');
 
-process.exec("rm ./packages/**/*.js");
-process.exec("rm ./packages/middleware/**/*.js");
+
+
+
+
+
+const k = Object.keys(p.dependencies).filter((value,index,array)=> {
+    return value.includes("@local");
+});
+
+const path = k.map((value,index,array)=>{
+    return p.dependencies[value].substring(5);
+});
+
+
+path.forEach(value => {
+    process.exec(`rm ${value}/*.js`);
+    process.exec(`rm ${value}/**/*.js`);
+});
