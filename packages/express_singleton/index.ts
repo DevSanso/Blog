@@ -8,10 +8,12 @@ import router_register from './router';
 
 
 
+
 const app : Listener = (()=>{
     let e = express();
     middleware_register(e);
     router_register(e);
+
     return e;
 })();
 

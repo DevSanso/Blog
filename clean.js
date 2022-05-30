@@ -20,3 +20,4 @@ path.forEach(value => {
     process.exec(`rm ${value}/*.js`);
     process.exec(`rm ${value}/**/*.js`);
 });
+

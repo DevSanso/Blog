@@ -38,3 +38,4 @@ export default (e : Express) => {
 
     e.use(page);
 };
+
