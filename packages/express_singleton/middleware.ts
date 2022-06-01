@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import bodyParser from 'body-parser';
 
 import page from "@local/middleware_page";
-
+import db from "@local/middleware_db";
 
 const sessionMiddleware =(e : Express) => {
     let config = {
@@ -37,5 +37,6 @@ export default (e : Express) => {
     frameworkMiddleware(e);
 
     e.use(page);
+    e.use(db);
 };
 

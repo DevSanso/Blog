@@ -7,13 +7,11 @@ import '@local/extends/express_session/user_info';
 
 import userInfo from './user.json';
 
-import './session';
-
+import '@local/extends/express_session/user_info';
 
 
 const loginHandler = (req : Request,res : Response) =>  {
     const email = req.body.email;
-    console.log(req.session);
     if(email != userInfo.email){
         res.sendStatus(400);
         return;
