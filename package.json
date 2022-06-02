@@ -22,6 +22,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/express-session": "^1.17.4",
+    "@types/uuid": "^8.3.4",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
   },
@@ -29,14 +30,16 @@
     "@local/express_singleton": "file:./packages/express_singleton",
     "@local/extends": "file:./packages/extends",
     "@local/metadata": "file:./packages/metadata",
-    "@local/middleware_page": "file:./packages/middleware/page",
     "@local/middleware_db": "file:./packages/middleware/db",
-    "@local/router_user": "file:./packages/router/user",
+    "@local/middleware_page": "file:./packages/middleware/page",
+    "@local/router_user" : "file:./packages/router/user",
+    "@local/router_post" : "file:./packages/router/editor",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "helmet": "^5.1.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "uuid": "^8.3.2"
   }
 }
