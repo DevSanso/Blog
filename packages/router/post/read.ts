@@ -1,8 +1,10 @@
 import {Request,Response} from 'express';
 import { RowDataPacket } from 'mysql2';
 
-import * as query from './query';
 import {Post} from '@local/metadata';
+import Ops from '@local/db_crud/op';
+import {PostField as f} from '@local/db_crud/fields';
+import dbCrud from '@local/db_crud';
 
 import "@local/extends/express/request";
 
@@ -14,24 +16,27 @@ export default async (req : Request,res : Response) => {
         res.send("not exist uuid query");
         return;
     }
-    const sqlQuery = query.makeSelectContentQuery(queryValue as string);
-    const conn = await req.dbPool.getDbConnection();
-    let result : Post;
-    try {
-        result = await (async () => {
-            return await conn.query(sqlQuery) as RowDataPacket[]
-        })()[0] as Post;
-    }catch(e) {
-        throw e;
-    }finally {
-        conn.release();
+    let ops : Ops<f>;
+    ops["id"] = {value : queryValue,op : "="};
+    const conn = req.dbPool.getDbConnection();
+    const rows = await dbCrud.post.read().read(conn,["title","date","content"],ops);
+    (await conn).release();
+    if(rows.length == 0) {
+        res.sendStatus(400);
+        return;
     }
+
+    let row = rows[0] as {
+        title : string,
+        date : string,
+        content : string
+    };
 
 
     const body : Omit<Post,"hash"> = {
-        title : result.title,
-        date : result.date,
-        content : result.content
+        title : row.title,
+        date : row.date,
+        content : row.content
     }
     
     res.status(200);
