@@ -104,3 +104,6 @@ packages/**/*.js
 
 # TernJS port file
 .tern-port
+
+#tests folder
+tests
