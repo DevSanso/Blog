@@ -17,7 +17,7 @@ interface CreateModel<CF> {
 }
 
 interface ReadModel<T> {
-    read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops : Ops<T>) : Promise<RowDataPacket[]>
+    read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops : Ops<T>) : Promise<RowDataPacket[][]>
 }
 
 interface DeleteModel<T> {
@@ -46,11 +46,11 @@ class Model<T> implements CreateModel<T>,ReadModel<T>,DeleteModel<T> {
             throw e;
         }
     }
-    public async read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops :Ops<T>) : Promise<RowDataPacket[]> {
+    public async read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops :Ops<T>) : Promise<RowDataPacket[][]> {
         const c = await conn;
         const query = readFn(this.table,field,ops);
 
-        return await c.query(query) as RowDataPacket[];
+        return await c.query(query) as RowDataPacket[][];
        
     }
 
