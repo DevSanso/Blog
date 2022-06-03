@@ -1,8 +1,8 @@
 import {Request,Response} from 'express';
-import { RowDataPacket } from 'mysql2';
+import Ops from '@local/db_crud/op';
+import {PostField as f} from '@local/db_crud/fields';
+import dbCrud from '@local/db_crud';
 
-import * as query from './query';
-import {Post} from '@local/metadata';
 
 import "@local/extends/express/request";
 
@@ -13,18 +13,11 @@ export default async (req : Request,res : Response) => {
         res.send("not exist uuid query");
         return;
     }
-    const sqlQuery = query.makeSelectContentQuery(queryValue as string);
-    const conn = await req.dbPool.getDbConnection();
-    try {
-        await conn.beginTransaction();
-        await conn.execute(query.makeDeleteContentQuery(queryValue as string));
-        conn.commit();
-    }catch(e) {
-        conn.rollback();
-        throw e;
-    }finally {
-        conn.release();
-    }
+    let cond  : Ops<f>;
+    cond["id"] = {value : queryValue,op : "="};
+    const conn = req.dbPool.getDbConnection();
+    await dbCrud.post.delete().delete(conn,cond);
+    (await conn).release();
 
     res.redirect("/");
 }
