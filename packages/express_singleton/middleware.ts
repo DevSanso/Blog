@@ -3,7 +3,7 @@ import session from 'express-session';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 
-import error from "@local/middleware_error";
+
 import page from "@local/middleware_page";
 import db from "@local/middleware_db";
 import access from '@local/middleware_access_restriction';
@@ -39,7 +39,6 @@ const frameworkMiddleware = (e : Express) => {
 export default (e : Express) => {
     frameworkMiddleware(e);
 
-    e.use(error);
     e.use(page);
     e.use(db);
     e.use(access);
