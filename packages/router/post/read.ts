@@ -26,7 +26,7 @@ export default async (req : Request,res : Response) => {
         return;
     }
 
-    let row = rows[0] as {
+    let row = rows[0][0] as {
         title : string,
         date : string,
         content : string
