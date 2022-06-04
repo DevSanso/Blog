@@ -25,20 +25,16 @@ const convertRawErrorToString = (e : any) : string => {
     return e as string;
 }
 
-export default (req : Request,res : Response,next : NextFunction) => {
-    try {
-        next();
-    }catch(e) {
-        if (isRawError(e)) {
-            systemHandling(req,res,{
-                code :500,
-                message : convertRawErrorToString(e),
-                object : "SYSTEM"
-            });
-            return;
-        }
-        const exception = e as ErrorException;
-        if(exception.object == "USER")userHandling(req,res,e);
-        systemHandling(req,res,e);
+export default (e:any,req : Request,res : Response,next : NextFunction) => {
+    if (isRawError(e)) {
+        systemHandling(req,res,{
+            code :500,
+            message : convertRawErrorToString(e),
+            object : "SYSTEM"
+        });
+        return;
     }
+    const exception = e as ErrorException;
+    if(exception.object == "USER")userHandling(req,res,e);
+    else systemHandling(req,res,e);
 }
