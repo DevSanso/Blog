@@ -15,7 +15,7 @@ interface RequestRestrictionInfo{
 }
 
 const AccessList  : AccessRestrictions= {
-    "/P" : {method : ["POST"]}
+    "/post/editor" : {method : ["POST","DELETE"]}
 }
 
 
@@ -30,22 +30,28 @@ const isMatchRestrction = (info : RestrictionInfo,value : RequestRestrictionInfo
     return (info.method as Array<string>).indexOf(value.method) != -1;
 }
 
-const isExistSessionData = (req : Request) => req.session != undefined;
+const isExistSessionData = (req : Request) => req.session != undefined && req.session.userInfo != undefined;
 
 const isMatchingAccessIp = (req : Request) => req.session.userInfo.ip == req.ip;
 
 export default (req : Request,res : Response,next : NextFunction) => {
     const restrction = findUrlRestriction(req.url);
-
-    if(restrction == null || !isMatchRestrction(restrction,req)){
+    if(restrction == null){
         next();
         return;
     }
-    
-    if(isExistSessionData(req) && isMatchingAccessIp(req)) {
+    if(!isMatchRestrction(restrction,req)) {
+        next();
+        return;
+    }
+    if(!isExistSessionData(req)) {
         res.sendStatus(401);
         return;
     }
 
+    if(!isMatchingAccessIp(req)) {
+        res.sendStatus(401);
+        return;
+    }
     next();
 }
