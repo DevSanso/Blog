@@ -1,11 +1,15 @@
 import {PoolConnection,RowDataPacket} from 'mysql2/promise';
 
+import {ErrorException} from '@local/middleware_error/err_type';
+
 import createFn from './query/create';
 import readFn from './query/read';
 import deleteFn from './query/delete';
 
 import {Ops} from './query/utils/op';
 import {PostField,TagField} from './fields';
+
+
 
 type InterfaceKeys<T> = Array<keyof T>; 
 type Value<T ,P extends keyof T> = T | Pick<T,P>;
@@ -43,7 +47,12 @@ class Model<T> implements CreateModel<T>,ReadModel<T>,DeleteModel<T> {
             c.commit();
         }catch(e) {
             c.rollback();
-            throw e;
+            const exception  : ErrorException= {
+                code : 507,
+                message : e,
+                object : "SYSTEM"
+            }
+            throw exception;
         }
     }
     public async read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops :Ops<T>) : Promise<RowDataPacket[][]> {
@@ -64,7 +73,12 @@ class Model<T> implements CreateModel<T>,ReadModel<T>,DeleteModel<T> {
             c.commit();
         }catch(e) {
             c.rollback();
-            throw e;
+            const exception  : ErrorException= {
+                code : 507,
+                message : e,
+                object : "SYSTEM"
+            }
+            throw exception;
         }
     }
 }
