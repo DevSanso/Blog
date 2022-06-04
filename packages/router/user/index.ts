@@ -1,7 +1,7 @@
 import {Request,Response,Router} from 'express';
 import bcrypt from 'bcrypt';
 
-
+import {ErrorException} from '@local/middleware_error/err_type';
 import '@local/extends/express_session/user_info';
 
 
@@ -28,13 +28,23 @@ const loginHandler = (req : Request,res : Response) =>  {
     
     req.session.userInfo = {ip : req.ip};
     req.session.save(err => {
-        if (err != undefined)throw err;
+        const exception  : ErrorException= {
+            code : 507,
+            message : "session save error",
+            object : "SYSTEM"
+        }
+        if (err != undefined)throw exception;
     });
     res.redirect("/");
 };
 const logoutHandler = (req : Request,res : Response) => {
     req.session.destroy(err=>{
-        if (err != undefined)throw err;
+        const exception  : ErrorException= {
+            code : 507,
+            message : "session destroy error",
+            object : "SYSTEM"
+        }
+        if (err != undefined)throw exception;
     });
     res.redirect("/");
 };

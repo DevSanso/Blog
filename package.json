@@ -31,6 +31,7 @@
     "@local/extends": "file:./packages/extends",
     "@local/metadata": "file:./packages/metadata",
     "@local/db_crud" : "file:./packages/db_crud",
+    "@local/middleware_error": "file:./packages/middleware/error",
     "@local/middleware_db": "file:./packages/middleware/db",
     "@local/middleware_page": "file:./packages/middleware/page",
     "@local/middleware_access_restriction" : "file:./packages/middleware/access_restriction",
