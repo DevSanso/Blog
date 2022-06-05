@@ -55,7 +55,7 @@ class Model<T> implements CreateModel<T>,ReadModel<T>,DeleteModel<T> {
             throw exception;
         }
     }
-    public async read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops :Ops<T>) : Promise<RowDataPacket[][]> {
+    public async read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops :Ops<T> | null) : Promise<RowDataPacket[][]> {
         const c = await conn;
         const query = readFn(this.table,field,ops);
 

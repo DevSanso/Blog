@@ -13,8 +13,12 @@ const makeCond = <T>(o: Ops<T>) : string => {
 
 
 
-const makeReadQuery = <T>(table : string,selectFields : Array<keyof T>,op : Ops<T>) => {
-    return `SELECT ${splitRest(selectFields)} FROM ${table} WHERE ${makeCond(op)};`;
+const makeReadQuery = <T>(table : string,selectFields : Array<keyof T>,op : Ops<T> | null) => {
+    if(op != null) {
+        return `SELECT ${splitRest(selectFields)} FROM ${table} WHERE ${makeCond(op)};`;
+    }else {
+        return `SELECT ${splitRest(selectFields)} FROM ${table}`;
+    }
 }
 
 export default makeReadQuery;
