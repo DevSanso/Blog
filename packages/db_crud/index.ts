@@ -21,7 +21,7 @@ interface CreateModel<CF> {
 }
 
 interface ReadModel<T> {
-    read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops : Ops<T>) : Promise<RowDataPacket[][]>
+    read(conn : Promise<PoolConnection>,field : InterfaceKeys<T>,ops : Ops<T> | null) : Promise<RowDataPacket[][]>
 }
 
 interface DeleteModel<T> {
