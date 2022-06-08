@@ -1,4 +1,3 @@
-
 export interface PostField {
     title : string,
     id : string,
@@ -6,8 +5,12 @@ export interface PostField {
     date : string
 }
 
-
 export interface TagField {
     id : string
     tag : string
+}
+
+export interface PostImgField {
+    id : string,
+    data : string
 }

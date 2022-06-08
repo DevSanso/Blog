@@ -1,15 +1,17 @@
 import {Request,Response} from 'express';
 import {v4 as uuidv4} from 'uuid';
 
-import dbCrud from '@local/db_crud';
+import dbCrud, { InterfaceKeys } from '@local/db_crud';
+import  {PostImgField } from '@local/db_crud/fields';
 
 import "@local/extends/express/request";
 
 
 interface Body {
-    title : string,
+    title : string
     tags : Array<string>
     content : string
+    img : string | undefined
 }
 
 
@@ -31,16 +33,35 @@ export default async (req : Request,res : Response) => {
         res.send("not matching json value types");
         return;
     }
+
+
     const uuid = uuidv4();
-    const date = (new Date()).toString()
-    const conn = req.dbPool.getDbConnection();
-    await dbCrud.post.create().create(conn,["title","content","id","date"],{
-        "title" : requestBody.title,
-        "content" : requestBody.content,
-        "id" : uuid,
-        "date" : "NOW()"
-    });
-    (await conn).release();
+    const conn = await req.dbPool.getDbConnection();
+
+
+    try {
+        await dbCrud.post.create().create(conn,["title","content","id","date"],{
+            "title" : requestBody.title,
+            "content" : requestBody.content,
+            "id" : uuid,
+            "date" : "NOW()"
+        });
+        const field  : InterfaceKeys<PostImgField>= typeof requestBody.img === "undefined" ?["id"] : ["id","data"];
+        await dbCrud.postImg.create().create(conn,field, {
+            id : uuid,
+            data : requestBody.img
+        });
+    }catch(e) {
+        conn.rollback();
+        throw e;
+    }finally {
+        conn.release();
+    }
+
+    
+
+
+    
 
     res.redirect(`/post?url=${uuid}`);
 }

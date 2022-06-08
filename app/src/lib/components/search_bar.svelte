@@ -39,7 +39,7 @@
 </style>
 
 <script lang="ts">
-    let inputValue : string;
+    let inputValue : string = "";
     let inputElement : HTMLInputElement;
     export let searchEvent : (inputData : string) => undefined;
 
@@ -51,10 +51,10 @@
     const inputEvent = () => {
         updateInput();
         return undefined;
-    }
+    };
 
     const btnEvent = () => {
         searchAction();
         return undefined;
-    }
+    };
 </script>
