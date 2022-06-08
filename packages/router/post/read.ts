@@ -33,7 +33,7 @@ export default async (req : Request,res : Response) => {
     };
 
 
-    const body : Omit<Post,"hash"> = {
+    const body : Omit<Post,"id"> = {
         title : row.title,
         date : row.date,
         content : row.content
