@@ -1,0 +1,17 @@
+CREATE TABLE post (
+	title VARCHAR(256) NOT NULL,
+	id CHAR(37) NOT NULL,
+	content MEDIUMTEXT,
+	date DATETIME NOT NULL,
+	PRIMARY KEY (id)
+);
+CREATE TABLE tag (
+	tag VARCHAR(32) NOT NULL,
+	id CHAR(37) NOT NULL,
+    FOREIGN KEY tag(id) REFERENCES post(id) 
+);
+CREATE TABLE post_img (
+	id CHAR(37) NOT NULL UNIQUE,
+	data LONGTEXT,
+	FOREIGN KEY post_img(id) REFERENCES post(id) 
+);
