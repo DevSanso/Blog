@@ -7,7 +7,7 @@ const router = Router();
 
 
 router.post("",createFn);
-router.delete("",deleteFn);
+router.delete("/:uuid",deleteFn);
 
 
 export default router;
