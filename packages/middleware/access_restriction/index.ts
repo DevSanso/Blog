@@ -13,15 +13,22 @@ interface AccessRestrictions {
 interface RequestRestrictionInfo{
     method : string
 }
-
+const cutMethods = ["DELETE"];
 const AccessList  : AccessRestrictions= {
-    "/post/editor" : {method : ["POST","DELETE"]}
+    "/post/editor" : {method : ["POST","DELETE"]},
 }
 
+const removeTopUrl = (url : string) => {
+    const s = url.split("/");
+    s.pop();
+    return s.reduce((pre,current,index,arr)=>`${pre}/${current}`)
+}
 
-const findUrlRestriction = (url : string) : RestrictionInfo | null => {
-    const info = AccessList[url];
-   if(info == undefined)return null;
+const findUrlRestriction = (url : string,method : string) : RestrictionInfo | null => {
+
+    const u =   cutMethods.find(value => value == method) != undefined ? removeTopUrl(url) :  url;
+    const info = AccessList[u];
+    if(info == undefined)return null;
 
    return info;
 }
@@ -35,7 +42,7 @@ const isExistSessionData = (req : Request) => req.session != undefined && req.se
 const isMatchingAccessIp = (req : Request) => req.session.userInfo.ip == req.ip;
 
 export default (req : Request,res : Response,next : NextFunction) => {
-    const restrction = findUrlRestriction(req.url);
+    const restrction = findUrlRestriction(req.url,req.method);
     if(restrction == null){
         next();
         return;
