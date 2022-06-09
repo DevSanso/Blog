@@ -1,4 +1,4 @@
-import {Request,Response} from 'express';
+import {NextFunction, Request,Response} from 'express';
 import {v4 as uuidv4} from 'uuid';
 
 import dbCrud, { InterfaceKeys } from '@local/db_crud';
@@ -20,7 +20,7 @@ const chkBodyType = (b : Body) => {
     return typeof b.title === "string" && typeof b.content === "string";
 }
 
-export default async (req : Request,res : Response) => {
+const handler = async (req : Request,res : Response) => {
     if(!chkContentType(req.headers["content-type"])) {
         res.status(400);
         res.send("not content-type json");
@@ -34,22 +34,20 @@ export default async (req : Request,res : Response) => {
         return;
     }
 
-
-    const uuid = uuidv4();
+    const uuid = uuidv4().replace("-","");
     const conn = await req.dbPool.getDbConnection();
-
 
     try {
         await dbCrud.post.create().create(conn,["title","content","id","date"],{
-            "title" : requestBody.title,
-            "content" : requestBody.content,
-            "id" : uuid,
+            "title" : `\"${requestBody.title}\"`,
+            "content" : `\"${requestBody.content}\"`,
+            "id" : `\"${uuid}\"`,
             "date" : "NOW()"
         });
         const field  : InterfaceKeys<PostImgField>= typeof requestBody.img === "undefined" ?["id"] : ["id","data"];
         await dbCrud.postImg.create().create(conn,field, {
-            id : uuid,
-            data : requestBody.img
+            id : `\"${uuid}\"`,
+            data : `\"${requestBody.img}\"`
         });
     }catch(e) {
         conn.rollback();
@@ -58,10 +56,10 @@ export default async (req : Request,res : Response) => {
         conn.release();
     }
 
-    
-
-
-    
-
     res.redirect(`/post?url=${uuid}`);
+};
+
+
+export default (req : Request,res : Response,next : NextFunction) => {
+    handler(req,res).catch(value => next(value));
 }

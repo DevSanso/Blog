@@ -1,4 +1,4 @@
-import {Request,Response} from 'express';
+import {NextFunction, Request,Response} from 'express';
 import Ops from '@local/db_crud/op';
 import {PostField as f} from '@local/db_crud/fields';
 import dbCrud from '@local/db_crud';
@@ -6,7 +6,7 @@ import dbCrud from '@local/db_crud';
 
 import "@local/extends/express/request";
 
-export default async (req : Request,res : Response) => {
+const handler = async (req : Request,res : Response) => {
     const queryValue = req.query.uuid;
     if(typeof queryValue === "undefined") {
         res.status(400);
@@ -20,4 +20,8 @@ export default async (req : Request,res : Response) => {
     (await conn).release();
 
     res.redirect("/");
+};
+
+export default (req : Request,res : Response,next : NextFunction) => {
+    handler(req,res).catch(value => next(value));
 }
