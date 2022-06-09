@@ -1,6 +1,6 @@
 const process = require('child_process');
 const { stringify } = require('querystring');
-const p = require('./package.json');
+const p = require('../package.json');
 
 
 
