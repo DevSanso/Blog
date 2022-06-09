@@ -5,7 +5,7 @@
     <title>{appConfig.title}</title>
 </svelte:head>
 
-<MenuBar/>
+<MenuBar icons={loadMenuElement()}/>
 <header class="header">
     <img width="100%" height="100%" alt="header" src="./image/background.jpg"/>
     <p>{appConfig.title}</p>
@@ -48,12 +48,15 @@
     }
     .decoration > .blog-explain {
         font-size : 21px;
+        padding : 20px;
     }
 </style>
 
 
 <script lang="ts">
-    import MenuBar from "$lib/components/menu_bar.svelte";
+    import {session} from "$app/stores";
+
+    import MenuBar,{type IconShortcut} from "$lib/components/menu_bar.svelte";
     import SearchBar from '$lib/components/search_bar.svelte';
     import appConfig from "$lib/config/app.json";
 
@@ -65,6 +68,27 @@
             title : data
         };
         return JSON.stringify(j);
+    };    
+    const makeLoginMenuIcon = () : IconShortcut => {
+        return {
+            url : "/login",
+            iconUrl : "/image/material-login.png",
+            name : "login"
+        }
+    };
+    const makeLogoutMenuIcon = () : IconShortcut => {
+        return {
+            url : "/logout",
+            iconUrl : "/image/material-logout.png",
+            name : "logout"
+        }
+    };
+    const makeEditorMenuIcon = () : IconShortcut=> {
+        return {
+            url : "/post/editor",
+            iconUrl : "/image/material-addbox.png",
+            name : "editor"
+        }
     };
     const makeHref = (href : string,data : string) => `${href}/${data}`;
 
@@ -73,8 +97,29 @@
         location.href = makeHref(searchHref,d);
     };
 
+
+    const loadMenuElementAction = () : Array<IconShortcut> => {
+        session.subscribe(value => {
+            value
+        });
+        return new Array();
+    }
+
+    const loadMenuElement = () : Array<IconShortcut> => {
+        return loadMenuElementAction();
+    }
+
     const evSearch = (data : string) : undefined => {
         searchAction(data);
         return undefined;
     };
+
+
+
+
+
+
+
+
+
 </script>
