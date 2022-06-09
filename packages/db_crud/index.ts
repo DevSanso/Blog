@@ -85,9 +85,9 @@ export default {
         delete : () : DeleteModel<PostField> => new Model<PostField>("post")
     },
     tags : {
-        create : () : CreateModel<TagField> => new Model<TagField>("tags"),
-        read : () : ReadModel<TagField> => new Model<TagField>("tags"),
-        delete : () : DeleteModel<TagField> => new Model<TagField>("tags")
+        create : () : CreateModel<TagField> => new Model<TagField>("tag"),
+        read : () : ReadModel<TagField> => new Model<TagField>("tag"),
+        delete : () : DeleteModel<TagField> => new Model<TagField>("tag")
 
     },
     postImg : {
