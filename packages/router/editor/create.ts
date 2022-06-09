@@ -34,7 +34,7 @@ const handler = async (req : Request,res : Response) => {
         return;
     }
 
-    const uuid = uuidv4().replace("-","");
+    const uuid = uuidv4().toString().replace("-","");
     const conn = await req.dbPool.getDbConnection();
 
     try {
@@ -49,6 +49,7 @@ const handler = async (req : Request,res : Response) => {
             id : `\"${uuid}\"`,
             data : `\"${requestBody.img}\"`
         });
+        conn.commit();
     }catch(e) {
         conn.rollback();
         throw e;
