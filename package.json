@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx ts-node ./server main.ts",
-    "compile": "node ./compile.js",
-    "clean": "node ./clean.js"
+    "compile": "node ./scripts/compile.js",
+    "clean": "node ./scripts/clean.js"
   },
   "repository": {
     "type": "git",

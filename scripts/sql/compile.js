@@ -12,7 +12,11 @@ const path = k.map((value,index,array)=>{
 
 
 path.forEach(value => {
-    process.exec(`npx tsc --build ${value}`);
+    process.exec(`npx tsc --build ${value}`,(err,stdout,stderr)=>{
+        if(err != undefined)throw err;
+        else if(stdout != "")console.log(stdout);
+        else console.error(stderr);
+    });
 });
 
 
