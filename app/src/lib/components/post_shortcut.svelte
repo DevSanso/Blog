@@ -49,7 +49,7 @@
     const contentMaxLen = 256;
 
     export let title : string;
-    export let img : string;
+    export let img : string =  "/image/material-close.png";
     export let id : string;
 
 

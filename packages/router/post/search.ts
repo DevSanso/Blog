@@ -1,4 +1,4 @@
-import {Request,Response} from 'express';
+import {NextFunction, Request,Response} from 'express';
 import { RowDataPacket } from 'mysql2';
 import Fuse from 'fuse.js';
 
@@ -10,7 +10,8 @@ import dbCrud from '@local/db_crud';
 import "@local/extends/express/request";
 
 
-export default async (req : Request,res : Response) => {
+
+const handler = async (req : Request,res : Response) => {
     const queryValue = req.query.title as string;
 
     if(typeof queryValue === "undefined") {
@@ -41,4 +42,8 @@ export default async (req : Request,res : Response) => {
     
     res.status(200);
     res.send(JSON.stringify(result));
+};
+
+export default (req :Request,res : Response,next : NextFunction) => {
+    handler(req,res).catch(value => next(value));
 }

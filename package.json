@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx ts-node ./server main.ts",
-    "compile": "node ./compile.js",
-    "clean": "node ./clean.js"
+    "start": "npx ts-node ./server main.ts",
+    "compile": "node ./scripts/compile.js",
+    "clean": "node ./scripts/clean.js",
+    "dbInit" : "node ./scripts/db_init.js"
   },
   "repository": {
     "type": "git",
