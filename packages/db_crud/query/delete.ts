@@ -4,7 +4,7 @@ const makeCond = <T>(o: Ops<T>) : string => {
     const ks = Object.keys(o);
     return ks.reduce((pre,current,index,arr)=> {
         const ele = o[current] as { value: any; op: "=" | "<" | ">" | "<=" | ">="; };
-        return `${pre}` + ` ${current} ${ele.op} ${ele.value} `
+        return `${pre}` + ` ${current} ${ele.op} "${ele.value}" `
     },"");
 }
 
