@@ -17,7 +17,7 @@ const handler = async (req : Request,res : Response) => {
         return;
     }
     let ops : Ops<f>;
-    ops["id"] = {value : queryValue,op : "="};
+    ops["id"] = {value : `"${queryValue}"`,op : "="};
     const conn = req.dbPool.getDbConnection();
     const rows = await dbCrud.post.read().read(conn,["title","date","content"],ops);
     (await conn).release();
