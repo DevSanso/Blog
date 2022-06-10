@@ -34,7 +34,7 @@ const handler = async (req : Request,res : Response) => {
         return;
     }
 
-    const uuid = uuidv4().toString().replace("-","");
+    const uuid = uuidv4().toString().replaceAll("-","");
     const conn = await req.dbPool.getDbConnection();
 
     try {
