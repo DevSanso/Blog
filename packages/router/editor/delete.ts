@@ -15,7 +15,7 @@ const handler = async (req : Request,res : Response) => {
         return;
     }
     let cond  : Ops<PostField | TagField | PostImgField> = {} as Ops<PostField | TagField | PostImgField>;
-    cond["id"] = {value : queryValue,op : "="};
+    cond["id"] = {value : `"${queryValue}"`,op : "="};
     const conn =await req.dbPool.getDbConnection();
     try {
         await conn.beginTransaction();

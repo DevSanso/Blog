@@ -6,7 +6,7 @@
         <p class="date">{getDateWithResponse()}</p>
     </header>
     <section class="content">
-        {getContentWithResponse()}
+        {@html getContentWithResponse()}
     </section>
 </section>
 
