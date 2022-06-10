@@ -3,7 +3,7 @@ import { RowDataPacket } from 'mysql2';
 
 import {Post} from '@local/metadata';
 import Ops from '@local/db_crud/op';
-import {PostField as f} from '@local/db_crud/fields';
+import {PostField} from '@local/db_crud/fields';
 import dbCrud from '@local/db_crud';
 
 import "@local/extends/express/request";
@@ -16,7 +16,7 @@ const handler = async (req : Request,res : Response) => {
         res.send("not exist uuid query");
         return;
     }
-    let ops : Ops<f>;
+    let ops : Ops<PostField>  = {} as Ops<PostField>;
     ops["id"] = {value : `"${queryValue}"`,op : "="};
     const conn = req.dbPool.getDbConnection();
     const rows = await dbCrud.post.read().read(conn,["title","date","content"],ops);
