@@ -107,3 +107,7 @@ packages/**/*.js
 
 #tests folder
 tests
+
+
+#app folder
+www
