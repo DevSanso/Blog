@@ -5,7 +5,7 @@
     <title>{appConfig.title}</title>
 </svelte:head>
 
-<MenuBar icons={loadMenuElement()}/>
+<MenuBar icons={iconMenus}/>
 <header class="header">
     <img width="100%" height="100%" alt="header" src="./image/background.jpg"/>
     <p>{appConfig.title}</p>
@@ -52,16 +52,16 @@
     }
 </style>
 
-
 <script lang="ts">
-    import {session} from "$app/stores";
-
+    import {onMount} from 'svelte';
+    import cookie from 'cookie';
     import MenuBar,{type IconShortcut} from "$lib/components/menu_bar.svelte";
     import SearchBar from '$lib/components/search_bar.svelte';
     import appConfig from "$lib/config/app.json";
 
     const searchHref = "/search"
-
+    let cookies : Record<string,string>;
+    let iconMenus :  Array<IconShortcut>;
 
     const makeRouterData = (data : string) => {
         let j = {
@@ -91,6 +91,7 @@
         }
     };
     const makeHref = (href : string,data : string) => `${href}/${data}`;
+    const isExistSession = (cookie : Record<string,string>) => cookie["connect.sid"] != undefined;
 
     const searchAction = (data : string) => {
         const d = makeRouterData(data);
@@ -98,14 +99,14 @@
     };
 
 
-    const loadMenuElementAction = () : Array<IconShortcut> => {
-        session.subscribe(value => {
-            value
-        });
-        return new Array();
+    const loadMenuElementAction = () => {
+        if(isExistSession(cookies)) {
+            iconMenus = [makeEditorMenuIcon(),makeLogoutMenuIcon()];
+        }
+        iconMenus = [makeLoginMenuIcon()];
     }
 
-    const loadMenuElement = () : Array<IconShortcut> => {
+    const loadMenuElement = ()  => {
         return loadMenuElementAction();
     }
 
@@ -114,12 +115,7 @@
         return undefined;
     };
 
-
-
-
-
-
-
-
-
+    onMount(()=> {
+        cookies = cookie.parse(document.cookie);
+    });
 </script>
