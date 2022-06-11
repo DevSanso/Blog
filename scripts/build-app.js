@@ -4,7 +4,7 @@ const process = require('child_process');
 
 
 const cpBuildApp = () => {
-    process.exec("cp -rf  ./app/build ./tests/www",(err,stdout,stderr)=> {
+    process.exec("cp -rf  ./app/build ./www",(err,stdout,stderr)=> {
         if(err)throw err;
     });
 }
