@@ -1,4 +1,4 @@
-import {env} from 'process';
+import {env,cwd} from 'process';
 import path from 'path';
 import {join,parse,ParsedPath} from 'path';
 import {existsSync} from 'fs';
@@ -12,7 +12,7 @@ const WWWPath = env.WWW_DIRECTORY != undefined ? (()=> {
         process.exit(1);
     }
     return env.WWW_DIRECTORY;
-})() : path.join(__dirname,"./www");
+})() : path.join(cwd(),"./www");
 
 const mapping = (() => {
     return Array.from(mappingJson);

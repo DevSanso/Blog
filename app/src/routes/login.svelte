@@ -1,11 +1,15 @@
 <nav class="login">
     <section>
         <input placeholder="Email"bind:value={emailText}>
-        <input placeholder="Password" bind:value={passwordText}>
+        <input placeholder="Password" type="password" bind:value={passwordText}>
     </section>
     <nav>
         <button on:click={btnEvent}>Login</button>
     </nav>
+    <form bind:this={formElement} style="opacity : 0;" action="/user/login" method="post">
+        <input placeholder="Email"bind:value={emailText} name="email">
+        <input placeholder="Password" type="password" bind:value={passwordText} name="password">
+    </form>
 </nav>
 
 <style>
@@ -15,6 +19,7 @@
 
         margin-top : 30vh;
         margin-left : 90px;
+        margin-bottom: 30vh;
 
         overflow: hidden;
     }
@@ -53,18 +58,10 @@
     let emailText = "";
     let passwordText = "";
 
-    const makePostUrl = (email : string,password : string) => `email=${email}&password=${password}`;
+    let formElement : HTMLFormElement;
     
     const btnAction = async() => {
-        let body = makePostUrl(emailText,passwordText);
-        let res = await axios.post("/login",body);
-        if(res.status != 302){
-            alert("로그인 실패");
-            return;
-        }
-        const ck = res.headers['set-cookie'] as string[];
-        ck.forEach(value => document.cookie = value);
-        location.href = "/";
+        formElement.submit();
     }
     const btnEvent = () => {
         btnAction();

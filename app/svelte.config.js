@@ -14,9 +14,15 @@ const config = {
 			fallback: null,
 			precompress : false
 		}),
+		csp : {
+			directives : {
+				"script-src" : ["unsafe-inline","self"]
+			}
+		},
 		prerender : {
 			default : true
 		}
+		
 	}
 };
 

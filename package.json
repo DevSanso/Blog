@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npx ts-node ./server main.ts",
-    "compile": "node ./scripts/compile.js",
+    "compileServer": "node ./scripts/compile.js",
+    "buildApp" : "node ./scripts/build-app.js",
     "clean": "node ./scripts/clean.js",
     "dbInit" : "node ./scripts/db_init.js"
   },
