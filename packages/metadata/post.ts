@@ -3,6 +3,7 @@ export interface Post {
     id : string
     content : string
     date : string
+    img : string | undefined
 }
 
 export interface PostTag {
