@@ -21,9 +21,9 @@ const chkBodyType = (b : Body) => {
 }
 const makeImageDataDbData = (b : Body,uuid : string) => {
     if(b.img == undefined)
-        return [["id"],{id:uuid}];
+        return [["id"],{id:`"${uuid}"`}];
 
-    return [["id","data"],{id:uuid,data : b.img}];
+    return [["id","data"],{id:`"${uuid}"`,data : `"${b.img}"`}];
 }
 
 const handler = async (req : Request,res : Response) => {
