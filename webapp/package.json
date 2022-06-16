@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "npx esbuild ./src/index.ts --bundle --outfile=./static/bundle/index.js",
+    "build" : "npx esbuild ./src/index.ts --bundle  --loader:.jpg=dataurl  --outfile=./static/bundle/index.js",
     "http" : "npx http-server ./static "
   },
   "author": "Sunken Ahn <devsanso@outlook.com>",
