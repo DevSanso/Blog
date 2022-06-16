@@ -1,0 +1,32 @@
+div[area-post-simeple-box] {
+    max-width : 900px;
+    max-height : 350px;
+    min-width : 400px;
+    min-height : 210px; 
+
+    box-sizing: border-box;
+    background-color: #57ADFC;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 100px;
+}
+div[area-post-simeple-box] > span.title {
+    font-size : 72px;
+    color : whitesmoke;
+}
+
+div[area-post-simeple-box] > span.date {
+    font-size : 20px;
+    color : whitesmoke;
+
+}
+div[area-post-simeple-box] > section {
+    font-size : 32px;
+    color : whitesmoke;
+}
+@media  (max-wdith : 1279px) {
+    div[area-post-simeple-box] {
+        width : 900px;
+        height : 350px;
+    }
+}
