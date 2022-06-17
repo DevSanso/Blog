@@ -1,0 +1,22 @@
+{
+  "name": "blog_webapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "npx esbuild ./src/index.ts --bundle  --loader:.jpg=dataurl  --outfile=./static/bundle/index.js",
+    "http" : "npx http-server ./static "
+  },
+  "author": "Sunken Ahn <devsanso@outlook.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "esbuild": "^0.14.43",
+    "http-server": "^14.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.7.3"
+  }
+}

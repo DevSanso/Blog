@@ -19,6 +19,12 @@ const chkContentType = (contentType : string) => contentType == "application/jso
 const chkBodyType = (b : Body) => {
     return typeof b.title === "string" && typeof b.content === "string";
 }
+const makeImageDataDbData = (b : Body,uuid : string) => {
+    if(b.img == undefined)
+        return [["id"],{id:`"${uuid}"`}];
+
+    return [["id","data"],{id:`"${uuid}"`,data : `"${b.img}"`}];
+}
 
 const handler = async (req : Request,res : Response) => {
     if(!chkContentType(req.headers["content-type"])) {
@@ -44,11 +50,10 @@ const handler = async (req : Request,res : Response) => {
             "id" : `\"${uuid}\"`,
             "date" : "NOW()"
         });
-        const field  : InterfaceKeys<PostImgField>= typeof requestBody.img === "undefined" ?["id"] : ["id","data"];
-        await dbCrud.postImg.create().create(conn,field, {
-            id : `\"${uuid}\"`,
-            data : `\"${requestBody.img}\"`
-        });
+        let [field,data]  = makeImageDataDbData(requestBody,uuid);
+        await dbCrud.postImg
+            .create()
+            .create(conn,field as InterfaceKeys<PostImgField>,data as PostImgField);
         conn.commit();
     }catch(e) {
         conn.rollback();
