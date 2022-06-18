@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "npx esbuild ./src/index.ts --bundle  --loader:.jpg=dataurl  --outfile=./static/bundle/index.js",
-    "http" : "npx http-server ./static "
+    "build": "node ./scripts/build.js",
+    "http": "npx http-server ./static "
   },
   "author": "Sunken Ahn <devsanso@outlook.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
+    "axios": "^0.27.2",
     "esbuild": "^0.14.43",
     "http-server": "^14.1.1",
     "react": "^18.2.0",
