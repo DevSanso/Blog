@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 
+import '@assets/css/view/search.css';
+
 import SearchBox from '@app/widget/SearchBox';
 import PostSimpleBox from '@app/widget/PostSimpleBox';
 import {search, emptyBody,ResultElement} from '@lib/rest/search_post';

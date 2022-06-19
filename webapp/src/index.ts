@@ -1,2 +1,2 @@
+import '@assets/css/common.css';
 import '@app/view/index';
-import '@assets/css/index.css';

@@ -1,2 +1,2 @@
+import '@assets/css/common.css';
 import '@app/view/search';
-import '@assets/css/search.css';
