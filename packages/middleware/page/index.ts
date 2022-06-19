@@ -25,12 +25,18 @@ const isMatchingExt = (url : string,mapping : Array<string>) => {
     });
     return ret != -1? true : false;
 };
-
+const chkUrlAndNoBodyAndEmptyQuery = (req : Request) => {
+    return req.body == undefined && req.query== {} && path.extname(req.url) == "";
+}
 const makeFilePathFromUrl = (root : string,url : string) => join(root,url);
 
 export default (req : Request,res : Response,next : NextFunction) =>{
-    if(req.method == "GET" && req.url == "/") 
-        req.url = "/index.html";
+    if(req.method == "GET") {
+        if(req.url == "/")req.url == "/";
+        else if(chkUrlAndNoBodyAndEmptyQuery(req))req.url=`${req.url}.html`;
+    }
+        
+    
     
     if(req.method == "GET" && isMatchingExt(req.url,mapping)) {
         const filePath = makeFilePathFromUrl(WWWPath,req.url);

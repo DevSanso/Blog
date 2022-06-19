@@ -30,3 +30,5 @@ class PageHeader extends Component<Props> {
         );
     }
 }
+
+export default PageHeader;
