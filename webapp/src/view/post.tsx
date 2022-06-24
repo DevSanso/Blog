@@ -4,6 +4,7 @@ import React,{useState} from 'react';
 import PageHeader from '@app/widget/PageHeader';
 import * as local from'@lib/storage/storage';
 import {post as restGet,ResponseBody} from '@lib/rest/post';
+import root from '@lib/init/ui';
 
 const closeImg = require("@assets/image/material-close.png");
 
@@ -62,4 +63,4 @@ const Post = () => {
 };
 
 
-export default Post;
+root.render(<Post></Post>)
